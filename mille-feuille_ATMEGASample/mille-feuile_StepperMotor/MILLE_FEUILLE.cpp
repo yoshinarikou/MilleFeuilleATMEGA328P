@@ -89,6 +89,7 @@ void getWireSetting(uint8_t myPin[4],sDevInfo *DeviceInfomation){
 #define RELAY_LIB
 #define TOF_LIB
 #define RN4020_LIB
+#define RN42_LIB
 
 void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
         
@@ -175,6 +176,10 @@ void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
 #endif
 #ifdef RN4020_LIB
     }else if((myAddress >= (SPECIAL_ADDRESS+0x09))&&(myAddress <= (SPECIAL_ADDRESS+0x0C))){
+        wire[0]=mySoftTX; wire[1]=mySoftRX;
+#endif
+#ifdef RN42_LIB
+    }else if((myAddress >= (SPECIAL_ADDRESS+0x0D))&&(myAddress <= (SPECIAL_ADDRESS+0x10))){
         wire[0]=mySoftTX; wire[1]=mySoftRX;
         
 #endif

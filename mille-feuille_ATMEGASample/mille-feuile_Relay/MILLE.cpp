@@ -16,8 +16,7 @@ mille::mille(){
   //pinMode(_in4,INPUT);
 
   pinMode(_ncs,OUTPUT);
-  //SPI.setClockDivider(SPI_CLOCK_DIV2);
-  SPI.setClockDivider(SPI_CLOCK_DIV32);
+  SPI.setClockDivider(SPI_CLOCK_DIV2);
   SPI.setDataMode(SPI_MODE0);
   SPI.begin();
   digitalWrite(_ncs, HIGH);
@@ -179,7 +178,7 @@ void mille::holdConnect(sDevInfo *myDevInfo) {
 void mille::holdDisconnect(sDevInfo *myDevInfo) {
     uint8_t num,i;
 
-    order(myDevInfo->address, mHOLD_ON, 0x00);
+    order(myDevInfo->address, mHOLD_ON, 0xff);
     
     num = sizeof(myDevInfo->IOs)/sizeof(uint8_t);
     for(i=0;i<num;++i){

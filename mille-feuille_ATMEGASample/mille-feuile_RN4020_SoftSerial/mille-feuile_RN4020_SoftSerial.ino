@@ -71,7 +71,7 @@ void initRN4020(void){
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);
+  Serial.begin(9600);
   myRN4020Serial0.begin(115200);
   if(myMille.detectModule(&infoRN4020)){  
       exit(0);    //device conection error
@@ -80,14 +80,16 @@ void setup() {
 
 void loop() {
   
+  Serial.write("Start Setting RN4020...\r\n");
   myMille.connect(&infoRN4020);
   delay(100);
+  Serial.write("Connect wires...\r\n");
   myRN4020Serial0.begin(115200);
   initRN4020();
 
-  Serial.write("Redy to connect!\r\n");
+  Serial.write("Ready to connect!\r\n");
   
-  Serial.println("Data from RN4020:");
+  Serial.println("Send \"@\" from smart phone and get \"Hello\" from ATMEGA328P.\r\n");
 
   //Read text from RN4020--------------------------------
   char temp[2];

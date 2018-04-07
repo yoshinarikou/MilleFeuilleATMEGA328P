@@ -178,7 +178,7 @@ void mille::holdConnect(sDevInfo *myDevInfo) {
 void mille::holdDisconnect(sDevInfo *myDevInfo) {
     uint8_t num,i;
 
-    order(myDevInfo->address, mHOLD_ON, 0x00);
+    order(myDevInfo->address, mHOLD_ON, 0xff);
     
     num = sizeof(myDevInfo->IOs)/sizeof(uint8_t);
     for(i=0;i<num;++i){
