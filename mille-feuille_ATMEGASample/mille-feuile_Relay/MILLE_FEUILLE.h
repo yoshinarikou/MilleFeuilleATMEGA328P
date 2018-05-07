@@ -1,5 +1,5 @@
-#ifndef ___MILLE_FEUILLE_H___
-#define ___MILLE_FEUILLE_H___
+#ifndef MILLE_FEUILLE_H
+#define MILLE_FEUILLE_H
  
 #include "MILLE.h"
 

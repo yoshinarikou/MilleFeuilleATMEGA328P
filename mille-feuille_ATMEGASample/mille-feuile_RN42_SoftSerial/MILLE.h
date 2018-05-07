@@ -1,15 +1,19 @@
-#ifndef ___MILLE_H___
-#define ___MILLE_H___
- 
+#ifndef MILLE_H
+#define MILLE_H
+
 #include "Arduino.h"
 #include <inttypes.h>
 #include "MILSTRUCT.h"
+
+#ifdef MILLE_FEUILLE_MODE
 #include <SPI.h>
+#endif
 
 #define BASE_ADDRESS 0x80000000
 #define SPECIAL_ADDRESS 0xC0000000
 #define DETECTMODE_ON 0x03
 #define DETECTMODE_OFF 0x04
+#define BASEBOARD 0xAA
 
 
 class mille {

@@ -1,10 +1,9 @@
-#ifndef MILLEIO_h
-#define MILLEIO_h
+#ifndef MILLEIO_H
+#define MILLEIO_H
  
 #include "Arduino.h"
 #include <inttypes.h>
 #include "MILLE.h"
-
 
 class MILLEIO {
 public:

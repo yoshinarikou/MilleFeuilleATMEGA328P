@@ -1,7 +1,9 @@
-#ifndef ___MILSTRUCT_H___
-#define ___MILSTRUCT_H___
+#ifndef MILSTRUCT_H
+#define MILSTRUCT_H
 
 #include <inttypes.h>
+
+#define MILLE_FEUILLE_MODE //please comment out for mass production
 
 #define MAX_IONUMBRE 4
 #define NORMAL_IONUMBRE 4

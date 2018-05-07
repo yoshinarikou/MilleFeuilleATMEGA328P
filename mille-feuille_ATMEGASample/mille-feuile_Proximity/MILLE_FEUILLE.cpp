@@ -1,9 +1,7 @@
-
 #include "MILLE_FEUILLE.h"
 
 const uint8_t myOutPin[NUM_OUTPUT] = {3,5,6,9,7,8};
 const uint8_t myInPin[NUM_INPUT] = {2,14,15,16,17};
-
 
 void getWireSetting(uint8_t myPin[4],sDevInfo *DeviceInfomation){
   int i,j;
@@ -66,9 +64,6 @@ void getWireSetting(uint8_t myPin[4],sDevInfo *DeviceInfomation){
 }
 
 
-
-
-
 /////////////
 //select libraly
 #define GPIOBOARD_LIB
@@ -88,6 +83,9 @@ void getWireSetting(uint8_t myPin[4],sDevInfo *DeviceInfomation){
 #define HART_LIB
 #define RELAY_LIB
 #define TOF_LIB
+#define SIMPLE_LED_LIB
+#define SIMPLE_BUTTON_LIB
+#define DCMOTOR2CH_LIB
 #define RN4020_LIB
 #define RN42_LIB
 
@@ -174,6 +172,18 @@ void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
     }else if((myAddress >= (BASE_ADDRESS+0x51))&&(myAddress <= (BASE_ADDRESS+0x54))){
         wire[0]=mySDA; wire[1]=mySCL;
 #endif
+#ifdef DCMOTOR2CH_LIB
+    }else if((myAddress >= (BASE_ADDRESS+0x59))&&(myAddress <= (BASE_ADDRESS+0x5C))){
+        wire[0]=myOutPin[1]; wire[1]=myOutPin[2]; wire[2]=myOutPin[3]; wire[3]=myOutPin[4];
+#endif
+#ifdef SIMPLE_LED_LIB
+    }else if((myAddress >= (BASE_ADDRESS+0x5D))&&(myAddress <= (BASE_ADDRESS+0x60))){
+        wire[0]=myOutPin[1]; wire[1]=myOutPin[2]; wire[2]=myOutPin[3]; wire[3]=myOutPin[4];
+#endif
+#ifdef SIMPLE_BUTTON_LIB
+    }else if((myAddress >= (BASE_ADDRESS+0x61))&&(myAddress <= (BASE_ADDRESS+0x64))){
+        wire[0]=myInPin[1]; wire[1]=myInPin[2]; wire[2]=myInPin[3]; wire[3]=myInPin[4];
+#endif
 #ifdef RN4020_LIB
     }else if((myAddress >= (SPECIAL_ADDRESS+0x09))&&(myAddress <= (SPECIAL_ADDRESS+0x0C))){
         wire[0]=mySoftTX; wire[1]=mySoftRX;
@@ -181,9 +191,7 @@ void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
 #ifdef RN42_LIB
     }else if((myAddress >= (SPECIAL_ADDRESS+0x0D))&&(myAddress <= (SPECIAL_ADDRESS+0x10))){
         wire[0]=mySoftTX; wire[1]=mySoftRX;
-        
 #endif
-
     }else{
         //Serial.begin(115200);
         //Serial.println("IO error");
