@@ -88,6 +88,7 @@ void getWireSetting(uint8_t myPin[4],sDevInfo *DeviceInfomation){
 #define DCMOTOR2CH_LIB
 #define RN4020_LIB
 #define RN42_LIB
+#define IRSend_LIB
 
 void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
         
@@ -183,6 +184,14 @@ void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
 #ifdef SIMPLE_BUTTON_LIB
     }else if((myAddress >= (BASE_ADDRESS+0x61))&&(myAddress <= (BASE_ADDRESS+0x64))){
         wire[0]=myInPin[1]; wire[1]=myInPin[2]; wire[2]=myInPin[3]; wire[3]=myInPin[4];
+#endif
+#ifdef IRSend_LIB
+    }else if((myAddress >= (BASE_ADDRESS+0x69))&&(myAddress <= (BASE_ADDRESS+0x6C))){
+        wire[0]=myOutPin[1];
+#endif
+#ifdef IRRecieve_LIB
+    }else if((myAddress >= (BASE_ADDRESS+0x6D))&&(myAddress <= (BASE_ADDRESS+0x72))){
+        wire[0]=myOutPin[1];
 #endif
 #ifdef RN4020_LIB
     }else if((myAddress >= (SPECIAL_ADDRESS+0x09))&&(myAddress <= (SPECIAL_ADDRESS+0x0C))){

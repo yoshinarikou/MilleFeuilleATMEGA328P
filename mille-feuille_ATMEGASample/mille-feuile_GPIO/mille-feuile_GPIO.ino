@@ -4,7 +4,7 @@
 #include "MILLE.h"
 
 #define GPIO_ADDRESS 0x80000001  //device board address
-
+ 
 uint8_t myWire[4];  //The wires for device.配線の情報を格納する変数
 sDevInfo infoGpio;  //define structure for device information.
 

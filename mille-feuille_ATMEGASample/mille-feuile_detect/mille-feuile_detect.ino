@@ -8,7 +8,7 @@ uint8_t myWire[4];  //The wire for device.配線の情報を格納する変数
 sDevInfo infoDevice;  //define structure for device information.
 
 mille myMille;//mille-feuille contorol instance.
-MILLEIO myDevice(DEVICE_ADDRESS,myWire,&infoDevice,0);//AD2CH class instance.ベースボードのコネクタ番号0につながっているデバイスのインスタンスを生成します
+MILLEIO myDevice(DEVICE_ADDRESS,myWire,&infoDevice,0);// instance.ベースボードのコネクタ番号0につながっているデバイスのインスタンスを生成します
 
 void setup() {
   // put your setup code here, to run once:
