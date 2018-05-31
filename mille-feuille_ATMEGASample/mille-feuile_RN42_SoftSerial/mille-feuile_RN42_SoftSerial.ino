@@ -39,7 +39,6 @@ void loop() {
   Serial.write("Connect wires...\r\n");
   myRN42Serial0.begin(9600);
   Serial.write("Ready to connect!\r\n");
-  Serial.println("Send \"@\" from smart phone and get \"Hello\" from ATMEGA328P.\r\n");
 
   //Read text from RN42--------------------------------
   char inByte = 0;
