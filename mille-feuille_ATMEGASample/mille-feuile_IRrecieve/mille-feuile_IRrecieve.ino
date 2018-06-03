@@ -16,7 +16,7 @@ SoftwareSerial myIrr(myIO[0], myIO[1]); // RX, TX //mille-feuille has one softwa
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  myIrr.begin(600);
+  myIrr.begin(300);
   if(myMille.detectModule(&infoIRR)){  //Find the device
     exit(0);    //device conection error
   }

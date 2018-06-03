@@ -16,7 +16,7 @@ SoftwareSerial myIrs(myIO[1], myIO[0]); // RX, TX //mille-feuille has one softwa
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  myIrs.begin(600);
+  myIrs.begin(300);
   
   if(myMille.detectModule(&infoIRS)){  //Find the device
     exit(0);    //device conection error
@@ -25,7 +25,7 @@ void setup() {
 
 void loop() {
   myMille.connect(&infoIRS);//wire from MCU to device. デバイスと配線を接続、この後は普通にArduinoのコードで走ります。
-  myIrs.print('A');
+  myIrs.print('Hello world!');
   delay(1000);
   myMille.disconnect(&infoIRS);//別のデバイスに接続する前に接続断をします。
 }
