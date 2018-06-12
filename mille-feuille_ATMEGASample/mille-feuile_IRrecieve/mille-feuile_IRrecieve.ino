@@ -11,12 +11,13 @@ sDevInfo infoIRR;  //define structure for device information.
 
 mille myMille; //mille-feuille controller instance.
 MILLEIO myIRR(IRR_ADDRESS,myIO,&infoIRR,0); //MILLEIO class instance, connector number on baseboard is zero.ベースボードのコネクタ番号0につながっているデバイスのインスタンスを生成します
-SoftwareSerial myIrr(myIO[0], myIO[1]); // RX, TX //mille-feuille has one software serial pin. connector 0
+SoftwareSerial myIrr(myIO[1], myIO[0]); // RX, TX //mille-feuille has one software serial pin. connector 0
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   myIrr.begin(300);
+  Serial.println("start");
   if(myMille.detectModule(&infoIRR)){  //Find the device
     exit(0);    //device conection error
   }
@@ -25,6 +26,7 @@ void setup() {
 void loop() {
   int IRR;
   myMille.connect(&infoIRR); //wire from MCU to device. デバイスと配線を接続、この後は普通にArduinoのコードで走ります。
+  
   if(myIrr.available()){
     Serial.write((char)myIrr.read());
   }
