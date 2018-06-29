@@ -14,4 +14,7 @@ MILLEIO::MILLEIO(uint64_t Address,uint8_t pin[4],sDevInfo *DeviceInfomation, uin
 MILLEIO::~MILLEIO(){
   ;
 }
+MILLEIO::getMyWire(uint64_t Address, uint8_t pin[4], uint64_t connectorNumber){
+  getWire((BASE_ADDRESS + Address), pin, connectorNumber); //Address and conector Number
+}
 
