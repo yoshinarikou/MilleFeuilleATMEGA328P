@@ -5,6 +5,7 @@
 
 #else
 
+#define D0  0
 #define D1  1
 #define D2  2
 #define D3  3
