@@ -1,5 +1,27 @@
 #include "MILLE_FEUILLE.h"
 
+
+#ifdef MILLE_FEUILLE_MODE
+
+#else
+
+#define D1  1
+#define D2  2
+#define D3  3
+#define D4  4
+#define D5  5
+#define D6  6
+#define D7  7
+#define D8  8
+#define D9  9
+#define D10  10
+#define D11  11
+#define D12  12
+#define D13  13
+
+#endif
+
+
 const uint8_t myOutPin[NUM_OUTPUT] = {3,5,6,9,7,8};
 const uint8_t myInPin[NUM_INPUT] = {2,14,15,16,17};
 
