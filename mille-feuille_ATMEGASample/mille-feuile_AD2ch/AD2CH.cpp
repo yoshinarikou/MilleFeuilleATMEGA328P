@@ -1,6 +1,7 @@
 #include "AD2CH.h"
 #include "MILLE_FEUILLE.h"
 
+
 AD2CH::AD2CH(uint8_t pin0, uint8_t pin1,uint8_t pin2,uint8_t pin3){
 
     if(pin0!=myMOSI){
@@ -19,9 +20,22 @@ AD2CH::AD2CH(uint8_t pin0, uint8_t pin1,uint8_t pin2,uint8_t pin3){
 }
 
 void AD2CH::setup(void){
-      SPI.begin();
+      //SPI.begin();
       pinMode(myPin[3], OUTPUT);//CS pin
       digitalWrite(myPin[3], HIGH);
+  
+}
+
+void AD2CH::setSPIclock(uint8_t type){
+  if(type == TYPE_OF_SPI_CLOCK_START){
+    SPI.setClockDivider(SPI_CLOCK_DIV4);
+    SPI.setDataMode(SPI_MODE0);
+    SPI.begin();
+  }else{
+    SPI.setClockDivider(SPI_CLOCK_DIV2);
+    SPI.setDataMode(SPI_MODE0);
+    SPI.begin();
+  }
   
 }
 
@@ -39,13 +53,20 @@ int AD2CH::read(uint8_t ch){
         return -1;
     }
     
+    setSPIclock(TYPE_OF_SPI_CLOCK_START);
+    
     digitalWrite(myPin[3], LOW);
     SPI.transfer(0x01);
     inByte = SPI.transfer(sendData);
     myData = inByte << 8;
+    
     inByte = SPI.transfer(0x00);
+    
     myData = myData + inByte - 0xE000;
     digitalWrite(myPin[3], HIGH);
+    
+    setSPIclock(TYPE_OF_SPI_CLOCK_END);
+    
   }else{
     //normal Analog read 
     if(ch == 0){
@@ -71,6 +92,8 @@ int AD2CH::readDiff(uint8_t PN){
     return -1;
   }
   
+  setSPIclock(TYPE_OF_SPI_CLOCK_START);
+  
   digitalWrite(myPin[3], LOW);
   SPI.transfer(0x01);
   inByte = SPI.transfer(sendData);
@@ -78,6 +101,8 @@ int AD2CH::readDiff(uint8_t PN){
   inByte = SPI.transfer(0x00);
   myData = myData + inByte - 0xE000;
   digitalWrite(myPin[3], HIGH);
+
+  setSPIclock(TYPE_OF_SPI_CLOCK_END);
   
   return myData;
 }
