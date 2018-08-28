@@ -28,7 +28,7 @@ const uint8_t myInPin[NUM_INPUT] = {2,14,15,16,17};
 
 void getWireSetting(uint8_t myPin[4],sDevInfo *DeviceInfomation){
   int i,j;
-  
+
   for(j=0;j<4;++j){
     DeviceInfomation->IOs[j] = 0;
   }
@@ -37,45 +37,45 @@ void getWireSetting(uint8_t myPin[4],sDevInfo *DeviceInfomation){
     //Normal SPI
     //0x07 mSPI1
     DeviceInfomation->typeOfGate = mSPI1;
-    
+
   }else if((myPin[0]==myMOSI)&&(myPin[1]!=myMISO)&&(myPin[2]==mySCK)){
     //SCK SPI
     //0x08mSPI2
     DeviceInfomation->typeOfGate = mSPI2;
-    
+
   }else if((myPin[0]!=myMOSI)&&(myPin[1]!=myMISO)&&(myPin[2]==mySCK)){
     //MOSI SCK SPI
     //0x09mSPI3
     DeviceInfomation->typeOfGate = mSPI3;
-  
+
   }else if(((myPin[0]!=myMOSI)&&(myPin[1]==myMISO)&&(myPin[2]==mySCK))){
     //MISO SCK SPI
     //0x0A mSPI4
     DeviceInfomation->typeOfGate = mSPI4;
-    
+
   }else{
     //Normal IO
     //0x02mOPENALLGATE
-    DeviceInfomation->typeOfGate = mOPENALLGATE;    
+    DeviceInfomation->typeOfGate = mOPENALLGATE;
   }
 
   //Softserial
   if((myPin[0]==mySoftTX)&&(myPin[1]==mySoftRX)){
-    DeviceInfomation->IOs[0]=0x01; 
+    DeviceInfomation->IOs[0]=0x01;
     DeviceInfomation->IOs[1]=0x11;
   }
 
   //Normal GPIO
   for(j=0;j<4;++j){
     for(i=1;i<NUM_INPUT;++i){   //myInPin[0] is mySoftRx
-      
+
       if(myPin[j] == myInPin[i]){
         pinMode(myPin[j],INPUT);
         //sPin[j]=i+0x11;
         DeviceInfomation->IOs[j]=i+0x11;
       }
     }
-   
+
     for(i=1;i<NUM_OUTPUT;++i){   //myOutPin[0] is mySoftTx
       if(myPin[j] == myOutPin[i]){
         pinMode(myPin[j],OUTPUT);
@@ -113,9 +113,11 @@ void getWireSetting(uint8_t myPin[4],sDevInfo *DeviceInfomation){
 #define RN42_LIB
 #define IRSend_LIB
 #define IRRecieve_LIB
+#define DualDCMotorLow_LIB
+#define DualDCMotorHigh_LIB
 
 void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
-        
+
     if(myAddress == BASE_ADDRESS){
         ;
 #ifdef GPIOBOARD_LIB//OK
@@ -211,11 +213,19 @@ void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
 #endif
 #ifdef IRSend_LIB
     }else if((myAddress >= (BASE_ADDRESS+0x69))&&(myAddress <= (BASE_ADDRESS+0x6C))){
-        wire[0]=mySoftTX; wire[1]=mySoftRX;
+        wire[0]=myOutPin[1]; wire[1]=myInPin[1];
 #endif
 #ifdef IRRecieve_LIB
-    }else if((myAddress >= (BASE_ADDRESS+0x6D))&&(myAddress <= (BASE_ADDRESS+0x72))){
-        wire[0]=mySoftTX; wire[1]=mySoftRX;
+}else if((myAddress >= (BASE_ADDRESS+0x6D))&&(myAddress <= (BASE_ADDRESS+0x70))){
+        wire[0]=myOutPin[1]; wire[1]=myInPin[1];
+#endif
+#ifdef DualDCMotorLow_LIB
+}else if((myAddress >= (BASE_ADDRESS+0x71))&&(myAddress <= (BASE_ADDRESS+0x74))){
+        wire[0]=myOutPin[1]; wire[1]=myOutPin[2]; wire[2]=myOutPin[3]; wire[3]=myOutPin[4];
+#endif
+#ifdef DualDCMotorHigh_LIB
+}else if((myAddress >= (BASE_ADDRESS+0x75))&&(myAddress <= (BASE_ADDRESS+0x78))){
+        wire[0]=myOutPin[1]; wire[1]=myOutPin[2]; wire[2]=myOutPin[3]; wire[3]=myOutPin[4];
 #endif
 #ifdef RN4020_LIB
     }else if((myAddress >= (SPECIAL_ADDRESS+0x09))&&(myAddress <= (SPECIAL_ADDRESS+0x0C))){
@@ -231,4 +241,3 @@ void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
         ;
     }
 }
-
