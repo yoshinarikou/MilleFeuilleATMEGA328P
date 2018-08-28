@@ -213,10 +213,12 @@ void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
 #endif
 #ifdef IRSend_LIB
     }else if((myAddress >= (BASE_ADDRESS+0x69))&&(myAddress <= (BASE_ADDRESS+0x6C))){
+        //wire[0]=mySoftTX; wire[1]=mySoftRX;
         wire[0]=myOutPin[1]; wire[1]=myInPin[1];
 #endif
 #ifdef IRRecieve_LIB
 }else if((myAddress >= (BASE_ADDRESS+0x6D))&&(myAddress <= (BASE_ADDRESS+0x70))){
+      //wire[0]=mySoftTX; wire[1]=mySoftRX;
         wire[0]=myOutPin[1]; wire[1]=myInPin[1];
 #endif
 #ifdef DualDCMotorLow_LIB
