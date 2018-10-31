@@ -31,10 +31,17 @@ void AD2CH::setSPIclock(uint8_t type){
     SPI.setClockDivider(SPI_CLOCK_DIV4);
     SPI.setDataMode(SPI_MODE0);
     SPI.begin();
+    
+#ifdef MILLE_FEUILLE_MODE
+#else
+
   }else{
+
     SPI.setClockDivider(SPI_CLOCK_DIV2);
     SPI.setDataMode(SPI_MODE0);
     SPI.begin();
+#endif
+    
   }
   
 }
