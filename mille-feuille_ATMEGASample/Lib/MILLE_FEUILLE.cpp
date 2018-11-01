@@ -210,8 +210,8 @@ void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
         wire[0]=myInPin[1]; wire[1]=myInPin[2]; wire[2]=myInPin[3]; wire[3]=myInPin[4];
 #endif
 #ifdef IRSend_LIB
-    }else if((myAddress >= (BASE_ADDRESS+0x69))&&(myAddress <= (BASE_ADDRESS+0x6C))){
-        wire[0]=mySoftTX; wire[1]=mySoftRX;
+    }else if((myAddress >= (BASE_ADDRESS+0x7D))&&(myAddress <= (BASE_ADDRESS+0x80))){
+        wire[0]=myOutPin[1];
 #endif
 #ifdef IRRecieve_LIB
     }else if((myAddress >= (BASE_ADDRESS+0x6D))&&(myAddress <= (BASE_ADDRESS+0x72))){
