@@ -10,6 +10,7 @@
 #include "MILLE.h"
 
 #define DATA_LENGTH 1024
+//#define DATA_LENGTH 256
 
 #define DATA_HALF_UNIT_T 280 //NEC format 562usec
 //#define DATA_HALF_UNIT_T 212 //AEHA format 320~500usec(about 425usec)
@@ -22,7 +23,7 @@ sDevInfo infoIRR;  //define structure for device information.
 
 mille myMille; //mille-feuille controller instance.
 MILLEIO myIRR(IRR_ADDRESS,myIO,&infoIRR,0); //MILLEIO class instance, connector number on baseboard is zero.ベースボードのコネクタ番号0につながっているデバイスのインスタンスを生成します
-
+  
 void dataConverter(uint8_t *dataArrayHex){
   int i;
   boolean dataArray[DATA_LENGTH];
@@ -45,15 +46,17 @@ void dataConverter(uint8_t *dataArrayHex){
 
   int j=0;
   int k=0;
-  //data converter
+  //data converter///////////////
   for(i=0; i<DATA_LENGTH; ++i){
-    if((dataArray[i]==0) && (dataArray[i+2]==1) && (dataArray[i+4]==1)){ //data 1
+    if((dataArray[i]==0) && (dataArray[i+3]==1) && (dataArray[i+5]==1)){ //data 1
       dataArrayHex[k] = dataArrayHex[k] << 1;
       dataArrayHex[k] = dataArrayHex[k] | 0x01;
-      i+=7;
+      i+=3;
       ++j;
       
-    }else if((dataArray[i]==0) && (dataArray[i+2]==1) && (dataArray[i+4]==0)){ //data 0
+    }else if((dataArray[i]==0) && (dataArray[i+3]==1) && (dataArray[i+5]==0)){ //data 0
+      //0011 00
+      //00011 00
       dataArrayHex[k] = dataArrayHex[k] << 1;
       //dataArrayHex[k] = dataArrayHex[k] | 0x00;
       i+=3;
@@ -66,6 +69,7 @@ void dataConverter(uint8_t *dataArrayHex){
       ++k;
     }
   }
+  //////////////////////////////
   
   for(i=0; i<DATA_LENGTH/8; ++i){
     //Serial.print(i);
@@ -75,7 +79,8 @@ void dataConverter(uint8_t *dataArrayHex){
     
   }
 }
-  
+
+
 
 
 
