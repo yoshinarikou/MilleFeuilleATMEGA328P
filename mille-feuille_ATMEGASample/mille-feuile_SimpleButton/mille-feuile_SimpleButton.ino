@@ -1,6 +1,5 @@
 #include "Arduino.h"
 #include <inttypes.h>
-#include "MILLEIO.h"
 #include "MILLE.h"
 
 #define SIMPLE_BUTTON_ADDRESS 0x80000061  //device board address
@@ -8,8 +7,7 @@
 uint8_t myWire[4];  //The wires for device.配線の情報を格納する変数
 sDevInfo infoSBT;  //define structure for device information.
 
-mille myMille; //mille-feuille controller instance.
-MILLEIO myGpio(SIMPLE_BUTTON_ADDRESS,myWire,&infoSBT,0); //MILLEIO class instance, connector number on baseboard is zero.ベースボードのコネクタ番号0につながっているデバイスのインスタンスを生成します
+mille myMille(SIMPLE_BUTTON_ADDRESS,myWire,&infoSBT,0); //mille-feuille controller instance. Connector No,0 on baseboard.
   
 void setup() {
   // put your setup code here, to run once:

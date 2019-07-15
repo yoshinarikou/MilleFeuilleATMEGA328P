@@ -1,7 +1,18 @@
 #include "MILLE.h"
+#include "MILLEIO.h"
 
-mille::mille(){
+mille::mille(void){
+  setIOs();
+}
+mille::mille(uint64_t Address,uint8_t pin[4],sDevInfo *DeviceInfomation, uint64_t connectorNumber){
+  setIOs();
+  
+  MILLEIO myGpio(Address,pin,DeviceInfomation,connectorNumber);
+  
+}
 
+mille::setIOs(void){
+  
 #ifdef MILLE_FEUILLE_MODE
   _MOSI = 11;
   _MISO = 12;
@@ -22,7 +33,6 @@ mille::mille(){
   SPI.begin();
   digitalWrite(_ncs, HIGH);
 #endif
-
 }
 
 void mille::order(uint32_t const myAddress, uint8_t myData1, uint8_t myData2) {

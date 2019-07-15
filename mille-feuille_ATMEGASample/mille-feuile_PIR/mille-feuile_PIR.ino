@@ -1,14 +1,12 @@
 #include <inttypes.h>
 #include "MILLE.h"
-#include "MILLEIO.h"
 
 #define PIR_ADDRESS 0x80000035
 
 uint8_t myWire[4];  //The wire for device.配線の情報を格納する変数
 sDevInfo infoPIR;  //define structure for device information.
 
-mille myMille;//mille-feuille contorol instance.
-MILLEIO myPIR(PIR_ADDRESS,myWire,&infoPIR,0);//AD2CH class instance.ベースボードのコネクタ番号0につながっているデバイスのインスタンスを生成します
+mille myMille(PIR_ADDRESS,myWire,&infoPIR,0);//mille-feuille contorol instance.
 
 void setup() {
   // put your setup code here, to run once:

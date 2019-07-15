@@ -1,14 +1,12 @@
 #include <inttypes.h>
 #include "MILLE.h"
-#include "MILLEIO.h"
 
 #define PROXIMITY_ADDRESS 0x80000029
 
 sDevInfo infoPROXIMITY;  //define structure for device information.
 uint8_t myWire[4];  //The wire for device.配線の情報を格納する変数
 
-mille myMille;//mille-feuille contorol instance.
-MILLEIO myPROXIMITY(PROXIMITY_ADDRESS, myWire, &infoPROXIMITY, 0);//AD2CH class instance.ベースボードのコネクタ番号0につながっているデバイスのインスタンスを生成します
+mille myMille(PROXIMITY_ADDRESS, myWire, &infoPROXIMITY, 0);//mille-feuille contorol instance.
 
 void setup() {
   // put your setup code here, to run once:

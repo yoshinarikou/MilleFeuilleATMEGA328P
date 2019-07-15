@@ -113,6 +113,7 @@ void getWireSetting(uint8_t myPin[4],sDevInfo *DeviceInfomation){
 #define RN42_LIB
 #define IRSend_LIB
 #define IRRecieve_LIB
+#define TFT_LIB
 
 void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
         
@@ -224,6 +225,10 @@ void getWire(uint64_t myAddress, uint8_t *wire, uint8_t connectorNo){
 #ifdef RN42_LIB
     }else if((myAddress >= (SPECIAL_ADDRESS+0x0D))&&(myAddress <= (SPECIAL_ADDRESS+0x10))){
         wire[0]=mySoftTX; wire[1]=mySoftRX;
+#endif
+#ifdef TFT_LIB
+    }else if((myAddress >= (BASE_ADDRESS+0x81))&&(myAddress <= (BASE_ADDRESS+0x84))){
+        wire[0]=myMOSI; wire[1]=myOutPin[1]; wire[2]=mySCK; wire[3]=myOutPin[2];
 #endif
     }else{
         //Serial.begin(115200);

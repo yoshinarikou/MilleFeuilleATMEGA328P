@@ -19,6 +19,8 @@
 class mille {
   public:
     mille(void);
+    mille(uint64_t Address,uint8_t pin[4],sDevInfo *DeviceInfomation, uint64_t connectorNumber);
+    setIOs(void);
     void order(uint32_t const myAddress, uint8_t myData1, uint8_t myData2);
     uint8_t detectModule(sDevInfo *myDevInfo);
     uint8_t readInputData(void);

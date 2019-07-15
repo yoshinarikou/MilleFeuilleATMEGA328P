@@ -1,7 +1,6 @@
 #include "Arduino.h"
 #include <inttypes.h>
 #include "MILLE.h"
-#include "MILLEIO.h"
 #include "RN42BOARD.h"
 #include <SoftwareSerial.h> //Include nomally
 
@@ -11,8 +10,7 @@
 sDevInfo infoRN42;  //define structure for device information.
 uint8_t myIO[2];  
 
-mille myMille; //mille-feuille contorol instance.
-MILLEIO myRN42(RN42_ADDRESS, myIO, &infoRN42,0);  //set wire connector number 0
+mille myMille(RN42_ADDRESS, myIO, &infoRN42,0); //mille-feuille contorol instance.
 
 SoftwareSerial myRN42Serial0(myIO[1], myIO[0]); // RX, TX //mille-feuille has one software serial pin. connector 0
 

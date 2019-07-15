@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "MILLEIO.h"
 #include "MILLE.h"
 #include "DA1CH.h"
 
@@ -8,8 +7,7 @@
 uint8_t myWire[4];  //The wire for device.配線の情報を格納する変数
 sDevInfo infoDA1CH;  //define structure for device information.
 
-mille myMille;//mille-feuille contorol instance.
-MILLEIO myDA1ch(DA1CH_ADDRESS, myWire, &infoDA1CH,0);//AD2CH class instance.ベースボードのコネクタ番号0につながっているデバイスのインスタンスを生成します
+mille myMille(DA1CH_ADDRESS, myWire, &infoDA1CH,0);//mille-feuille contorol instance.
 
 DA1CH myDA0(myWire[0],myWire[1],myWire[2],myWire[3]);
 

@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include "MILLEIO.h"
 #include "MILLE.h"
 
 #define DCMOTOR2CH_ADDRESS 0x80000059
@@ -7,8 +6,7 @@
 sDevInfo infoDCMOTOR2CH;  //define structure for device information.
 uint8_t myWire[4];  //The wire for device.配線の情報を格納する変数
 
-mille myMille;//mille-feuille contorol instance.
-MILLEIO myDCMOTOR2CH(DCMOTOR2CH_ADDRESS, myWire,&infoDCMOTOR2CH,0);//class instance.ベースボードのコネクタ番号0につながっているデバイスのインスタンスを生成します
+mille myMille(DCMOTOR2CH_ADDRESS, myWire,&infoDCMOTOR2CH,0);//mille-feuille contorol instance.
 
 void setup() {
   // put your setup code here, to run once:

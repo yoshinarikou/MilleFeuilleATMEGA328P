@@ -1,16 +1,13 @@
 #include "Arduino.h"
 #include <inttypes.h>
 #include "MILLE.h"
-#include "MILLEIO.h"
 
 #define RELAY_ADDRESS 0x8000004D
 
 uint8_t myWire[4];  //The wire for device.配線の情報を格納する変数
 sDevInfo infoRELAY;  //define structure for device information.
 
-mille myMille;//mille-feuille contorol instance.
-MILLEIO myRELAY(RELAY_ADDRESS, myWire,&infoRELAY, 0);//AD2CH class instance.ベースボードのコネクタ番号0につながっているデバイスのインスタンスを生成します
-
+mille myMille(RELAY_ADDRESS, myWire,&infoRELAY, 0);//mille-feuille contorol instance.
 
 void setup() {
   // put your setup code here, to run once:

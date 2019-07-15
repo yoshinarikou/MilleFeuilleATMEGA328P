@@ -4,7 +4,6 @@
 #include "Arduino.h"
 #include <inttypes.h>
 #include "MILLE.h"
-#include "MILLEIO.h"
 #include "IRSEND.h"
 
 
@@ -13,8 +12,7 @@
 uint8_t myIO[4];  //The wire for device.配線の情報を格納する変数
 sDevInfo infoIRS;  //define structure for device information.
 
-mille myMille;//mille-feuille contorol instance.
-MILLEIO myIRS(IRS_ADDRESS, myIO,&infoIRS, 0);//class instance.ベースボードのコネクタ番号0につながっているデバイスのインスタンスを生成します
+mille myMille(IRS_ADDRESS, myIO,&infoIRS, 0);//mille-feuille contorol instance.
 
 IRSEND controller(myIO[0]);
 
